@@ -144,7 +144,8 @@ def generate_arctic_response():
         abort_chat(f"Conversation length too long. Please keep it under {max_tokens} tokens.")
     
     st.session_state.messages.append({"role": "assistant", "content": ""})
-    for event_index, event in enumerate(replicate.stream("snowflake/snowflake-arctic-instruct",
+    # for event_index, event in enumerate(replicate.stream("snowflake/snowflake-arctic-instruct",
+    for event_index, event in enumerate(replicate.stream(st.session_state.model,
                            input={"prompt": prompt_str,
                                   "prompt_template": r"{prompt}",
                                   "temperature": st.session_state.temperature,

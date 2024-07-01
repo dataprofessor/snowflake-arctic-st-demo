@@ -24,7 +24,7 @@ with st.sidebar:
     st.subheader("Adjust model parameters")
     temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=0.3, step=0.01)
     top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=0.9, step=0.01)
-    st.selectbox("Select a model",("meta/meta-llama-3-70b-instruct", "mistralai/mixtral-8x7b-instruct-v0.1", "google-deepmind/gemma-2b-it"), key="model")
+    st.selectbox("Select a model",("meta/meta-llama-3-70b-instruct", "mistralai/mixtral-8x7b-instruct-v0.1", "google-deepmind/gemma-2b-it:dff94eaf770e1fc211e425a50b51baa8e4cac6c39ef074681f9e39d778773626"), key="model")
 
 # Store LLM-generated responses
 if "messages" not in st.session_state.keys():

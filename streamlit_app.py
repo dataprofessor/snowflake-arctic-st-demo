@@ -4,7 +4,7 @@ import os
 from transformers import AutoTokenizer
 
 # App title
-st.set_page_config(page_title="Snowflake Arctic")
+st.set_page_config(page_title="Replicate Chatbot")
 
 def main():
     """Execution starts here."""
@@ -20,7 +20,12 @@ def get_replicate_api_token():
 def display_sidebar_ui():
     with st.sidebar:
         st.title('Snowflake Arctic')
+        st.selectbox(
+            "Select a model",
+            ("meta/meta-llama-3-70b-instruct", "mistralai/mixtral-8x7b-instruct-v0.1", "google-deepmind/gemma-2b-it"),
+            key = "model")
         st.subheader("Adjust model parameters")
+
         st.slider('temperature', min_value=0.01, max_value=5.0, value=0.3,
                                 step=0.01, key="temperature")
         st.slider('top_p', min_value=0.01, max_value=1.0, value=0.9, step=0.01,
@@ -49,11 +54,12 @@ def init_chat_history():
 
 def display_chat_messages():
     # Set assistant icon to Snowflake logo
-    icons = {"assistant": "./Snowflake_Logomark_blue.svg", "user": "⛷️"}
+    # icons = {"assistant": "./Snowflake_Logomark_blue.svg", "user": "⛷️"}
 
     # Display the messages
     for message in st.session_state.messages:
-        with st.chat_message(message["role"], avatar=icons[message["role"]]):
+        with st.chat_message(message["role"]):
+        # with st.chat_message(message["role"], avatar=icons[message["role"]]):
             st.write(message["content"])
 
 @st.cache_resource(show_spinner=False)
@@ -138,7 +144,8 @@ def generate_arctic_response():
         abort_chat(f"Conversation length too long. Please keep it under {max_tokens} tokens.")
     
     st.session_state.messages.append({"role": "assistant", "content": ""})
-    for event_index, event in enumerate(replicate.stream("snowflake/snowflake-arctic-instruct",
+    # for event_index, event in enumerate(replicate.stream("snowflake/snowflake-arctic-instruct",
+    for event_index, event in enumerate(replicate.stream(st.session_state.model,
                            input={"prompt": prompt_str,
                                   "prompt_template": r"{prompt}",
                                   "temperature": st.session_state.temperature,

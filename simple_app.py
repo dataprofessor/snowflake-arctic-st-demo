@@ -19,14 +19,13 @@ with st.sidebar:
         if not (replicate_api.startswith('r8_') and len(replicate_api)==40):
             st.warning('Please enter your Replicate API token.', icon='⚠️')
             st.markdown("**Don't have an API token?** Head over to [Replicate](https://replicate.com) to sign up for one.")
-
     os.environ['REPLICATE_API_TOKEN'] = replicate_api
-    
+
+    st.subheader("Models and parameters")
     model = st.selectbox("Select a model",("meta/meta-llama-3-70b-instruct", "mistralai/mixtral-8x7b-instruct-v0.1", "google-deepmind/gemma-2b-it"), key="model")
     if model == "google-deepmind/gemma-2b-it":
         model = "google-deepmind/gemma-2b-it:dff94eaf770e1fc211e425a50b51baa8e4cac6c39ef074681f9e39d778773626"
     
-    st.subheader("Adjust model parameters")
     temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=0.7, step=0.01, help="Randomness of generated output")
     if temperature >= 1:
         st.warning('Values exceeding 1 produces more creative and random output as well as increased likelihood of hallucination.')

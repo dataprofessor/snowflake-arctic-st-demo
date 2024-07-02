@@ -7,11 +7,11 @@ from transformers import AutoTokenizer
 # icons = {"assistant": "./Snowflake_Logomark_blue.svg", "user": "⛷️"}
 
 # App title
-st.set_page_config(page_title="Streamlit Replicate Chatbot")
+st.set_page_config(page_title="Streamlit Replicate Chatbot", page_icon="💬")
 
 # Replicate Credentials
 with st.sidebar:
-    st.title('Streamlit Replicate Chatbot')
+    st.title('💬 Streamlit Replicate Chatbot')
     if 'REPLICATE_API_TOKEN' in st.secrets:
         replicate_api = st.secrets['REPLICATE_API_TOKEN']
     else:

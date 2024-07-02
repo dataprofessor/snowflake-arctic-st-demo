@@ -12,6 +12,7 @@ st.set_page_config(page_title="Streamlit Replicate Chatbot", page_icon="💬")
 # Replicate Credentials
 with st.sidebar:
     st.title('💬 Streamlit Replicate Chatbot')
+    st.write('Create chatbots using various LLM models hosted at [Replicate](https://replicate.com/).')
     if 'REPLICATE_API_TOKEN' in st.secrets:
         replicate_api = st.secrets['REPLICATE_API_TOKEN']
     else:

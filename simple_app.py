@@ -27,7 +27,7 @@ with st.sidebar:
         model = "google-deepmind/gemma-2b-it:dff94eaf770e1fc211e425a50b51baa8e4cac6c39ef074681f9e39d778773626"
     
     st.subheader("Adjust model parameters")
-    temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=0.3, step=0.01, help="Randomness of generated output")
+    temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=0.7, step=0.01, help="Randomness of generated output")
     if temperature >= 1:
         st.warning('Values exceeding 1 produces more creative and random output as well as increased likelihood of hallucination.')
     if temperature < 0.1:

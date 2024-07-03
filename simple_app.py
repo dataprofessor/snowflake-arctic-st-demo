@@ -75,8 +75,8 @@ def generate_response():
         else:
             prompt.append("<|im_start|>assistant\n" + dict_message["content"] + "<|im_end|>")
     
-    #prompt.append("<|im_start|>assistant")
-    #prompt.append("")
+    prompt.append("<|im_start|>assistant")
+    prompt.append("")
     prompt_str = "\n".join(prompt)
     
     if get_num_tokens(prompt_str) >= 3072:
